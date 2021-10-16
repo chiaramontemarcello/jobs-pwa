@@ -5,6 +5,8 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
+    "generate_api_client": "openapi --input ./api-definition.yaml --output ./src/app/api",
+    "prestart": "npm run generate_api_client",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
@@ -58,6 +60,7 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "openapi-typescript-codegen": "^0.10.0-alpha",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "typescript": "~4.2.4"

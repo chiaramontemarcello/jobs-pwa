@@ -1,4 +1,4 @@
-FROM node:alpine3.13 AS builder
+FROM node:lts-alpine3.14 AS builder
 
 RUN npm install -g ionic
 

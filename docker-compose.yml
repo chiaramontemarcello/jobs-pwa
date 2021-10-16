@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  ##################  JOBS PWA  #########################
+  jobs-pwa:
+    container_name: jobs-pwa
+    image: ${CONTAINER_REGISTRY}/chiaramontemarcello/jobs-pwa/frontend-pwa:latest
+    restart: always
+    build:
+      context: ./frontend-pwa
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
