@@ -1,122 +1,151 @@
 openapi: 3.0.1
 info:
-  title: jobs.ch
-  description: Reverse Engineering of the jobs.ch public API
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
-  version: 1.0.0-oas3
+    title: jobs.ch
+    description: Reverse Engineering of the jobs.ch public API
+    license:
+        name: Apache 2.0
+        url: http://www.apache.org/licenses/LICENSE-2.0.html
+    version: 1.0.0-oas3
 servers:
-  - url: https://www.jobs.ch/api/v1/public
+    - url: https://www.jobs.ch/api/v1/public
 tags:
-  - name: search
-    description: Let's search some jobs
+    - name: search
+      description: Let's search some jobs
 paths:
-  /search:
-    get:
-      tags:
-        - search
-      summary: Serach for a job with filters
-      operationId: getByFilters
-      parameters:
-        - name: location
-          in: query
-          description: Status values that need to be considered for filter
-          required: false
-          schema:
-            type: string
-        - name: rows
-          in: query
-          description: Status values that need to be considered for filter
-          required: false
-          example: 20
-          schema:
-            type: integer
-        - name: query
-          in: query
-          description: Status values that need to be considered for filter
-          required: false
-          schema:
-            type: string
-        - name: employment-grade-min
-          in: query
-          description: Status values that need to be considered for filter
-          required: false
-          example: 50
-          schema:
-            type: integer
-        - name: employment-grade-max
-          in: query
-          description: Status values that need to be considered for filter
-          required: false
-          example: 100
-          schema:
-            type: integer
+    /search:
+        get:
+            tags:
+                - search
+            summary: Serach for a job with filters
+            operationId: getByFilters
+            parameters:
+                - name: location
+                  in: query
+                  description: City, Canton or Region
+                  required: false
+                  schema:
+                      type: string
+                - name: rows
+                  in: query
+                  description: Status values that need to be considered for filter
+                  required: false
+                  example: 20
+                  schema:
+                      type: integer
+                - name: query
+                  in: query
+                  description: Job Title, Position, Company
+                  required: false
+                  schema:
+                      type: string
+                - name: employment-grade-min
+                  in: query
+                  description: Value from 0 to 100 in Pensum (%)
+                  required: false
+                  example: 50
+                  schema:
+                      type: integer
+                - name: employment-grade-max
+                  in: query
+                  description: Value from 0 to 100 in Pensum (%)
+                  required: false
+                  example: 100
+                  schema:
+                      type: integer
 
-      responses:
-        "200":
-          description: OK
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/FilterResult"
-
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        '*/*':
+                            schema:
+                                $ref: '#/components/schemas/FilterResult'
+    /search/job/{job_id}:
+        get:
+            tags:
+                - search
+            summary: Serach for a job with filters
+            operationId: getJob
+            parameters:
+                - name: job_id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                '200':
+                    description: OK
+                    content:
+                        '*/*':
+                            schema:
+                                $ref: '#/components/schemas/Document'
 components:
-  schemas:
-    FilterResult:
-      type: object
-      properties:
-        start:
-          type: integer
-        rows:
-          type: integer
-        num_pages:
-          type: integer
-        current_page:
-          type: integer
-        documents:
-          type: array
-          items:
-            $ref: "#/components/schemas/Document"
-    Document:
-      type: object
-      properties:
-        age:
-          type: integer
-        job_id:
-          type: string
-        title:
-          type: string
-        company_name:
-          type: string
-        preview:
-          type: string
-        work_experience:
-          type: array
-          items:
-            $ref: "#/components/schemas/WorkExperience"
-        publication_date:
-          type: string
-          format: date-time
-        place:
-          type: string
-        employment_position_ids:
-          type: array
-          items:
-            type: integer
-        is_active:
-          type: boolean
-        is_paid:
-          type: boolean
-        images:
-          type: object
-          properties:
-            url:
-              type: string
-    WorkExperience:
-      type: object
-      properties:
-        profession:
-          type: integer
-        position:
-          type: integer
+    schemas:
+        FilterResult:
+            type: object
+            properties:
+                start:
+                    type: integer
+                rows:
+                    type: integer
+                num_pages:
+                    type: integer
+                current_page:
+                    type: integer
+                documents:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Document'
+        Document:
+            type: object
+            properties:
+                age:
+                    type: integer
+                job_id:
+                    type: string
+                title:
+                    type: string
+                company_name:
+                    type: string
+                preview:
+                    type: string
+                work_experience:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/WorkExperience'
+                initial_publication_date:
+                    type: string
+                    format: date-time
+                publication_date:
+                    type: string
+                    format: date-time
+                place:
+                    type: string
+                zipcode:
+                    type: string
+                employment_position_ids:
+                    type: array
+                    items:
+                        type: integer
+                industry_id:
+                    type: integer
+                is_active:
+                    type: boolean
+                is_paid:
+                    type: boolean
+                employment_grades:
+                    type: array
+                    items:
+                        type: number
+                images:
+                    type: object
+                    properties:
+                        url:
+                            type: string
+        WorkExperience:
+            type: object
+            properties:
+                profession:
+                    type: integer
+                position:
+                    type: integer
