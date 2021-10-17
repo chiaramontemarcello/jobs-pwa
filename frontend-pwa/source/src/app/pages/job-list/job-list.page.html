@@ -1,9 +1,22 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>job-list</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Job List</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
+    <ion-virtual-scroll [items]="jobs" approxItemHeight="50px">
+        <ion-card *virtualItem="let job;">
+            <ion-item>
+                <ion-thumbnail>
+                    <div class="wrapper-company-logo">
+                        <ion-img [src]="job.images[0].url"></ion-img>
+                    </div>
+                </ion-thumbnail>
+            </ion-item>
 
+            <ion-label>{{job.title}}</ion-label>
+        </ion-card>
+    </ion-virtual-scroll>
+    <ion-list> </ion-list>
 </ion-content>

@@ -1,0 +1,16 @@
+.gitignore
+README.md
+api.module.ts
+api/api.ts
+api/search.service.ts
+api/search.serviceInterface.ts
+configuration.ts
+encoder.ts
+git_push.sh
+index.ts
+model/document.ts
+model/documentImages.ts
+model/filterResult.ts
+model/models.ts
+model/workExperience.ts
+variables.ts
