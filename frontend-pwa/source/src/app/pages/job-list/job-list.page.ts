@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Document, SearchService, FilterResult } from 'src/app/api';
 
 @Component({
@@ -11,11 +12,16 @@ export class JobListPage implements OnInit {
 
     filterResult: FilterResult;
 
-    constructor(private searchService: SearchService) {}
+    constructor(private searchService: SearchService, private router: Router) {}
 
     ngOnInit() {
-        this.searchService.getByFilters().subscribe((res) => {
+        this.searchService.getByFilters('Zurich').subscribe((res) => {
             this.jobs = res.documents;
         });
+    }
+
+    openDetails(job: Document) {
+        console.log(job);
+        this.router.navigate(['test']);
     }
 }

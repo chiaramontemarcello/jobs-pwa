@@ -1,15 +1,14 @@
 @import '../../../global.scss';
 
-.wrapper-company-logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-
 .job-title {
     font-weight: 700;
     padding: 6px;
     color: var(--primary-color);
     border-radius: 5px;
+}
+
+.company-logo-wrapper {
+    display: flex;
+    align-items: center;
+    height: 100%;
 }

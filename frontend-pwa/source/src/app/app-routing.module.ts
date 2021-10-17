@@ -4,11 +4,11 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
     {
         path: '',
-        redirectTo: 'job-list',
+        redirectTo: 'jobs',
         pathMatch: 'full',
     },
     {
-        path: 'job-list',
+        path: 'jobs',
         loadChildren: () =>
             import('./pages/job-list/job-list.module').then((m) => m.JobListPageModule),
     },
