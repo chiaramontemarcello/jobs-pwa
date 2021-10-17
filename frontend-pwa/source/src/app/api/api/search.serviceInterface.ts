@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { Document } from '../model/models';
 import { FilterResult } from '../model/models';
 
 
@@ -27,12 +28,19 @@ export interface SearchServiceInterface {
     /**
      * Serach for a job with filters
      * 
-     * @param location Status values that need to be considered for filter
+     * @param location City, Canton or Region
      * @param rows Status values that need to be considered for filter
-     * @param query Status values that need to be considered for filter
-     * @param employmentGradeMin Status values that need to be considered for filter
-     * @param employmentGradeMax Status values that need to be considered for filter
+     * @param query Job Title, Position, Company
+     * @param employmentGradeMin Value from 0 to 100 in Pensum (%)
+     * @param employmentGradeMax Value from 0 to 100 in Pensum (%)
      */
     getByFilters(location?: string, rows?: number, query?: string, employmentGradeMin?: number, employmentGradeMax?: number, extraHttpRequestParams?: any): Observable<FilterResult>;
+
+    /**
+     * Serach for a job with filters
+     * 
+     * @param jobId 
+     */
+    getJob(jobId: string, extraHttpRequestParams?: any): Observable<Document>;
 
 }
