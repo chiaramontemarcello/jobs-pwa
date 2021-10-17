@@ -7,7 +7,7 @@ info:
         url: http://www.apache.org/licenses/LICENSE-2.0.html
     version: 1.0.0-oas3
 servers:
-    - url: https://www.jobs.ch/api/v1/public
+    - url: localhost:4200/api/v1/public
 tags:
     - name: search
       description: Let's search some jobs

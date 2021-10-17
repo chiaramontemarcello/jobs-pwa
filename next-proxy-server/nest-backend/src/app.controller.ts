@@ -11,8 +11,8 @@ export class AppController {
     return await this.appService.search(request);
   }
 
-  @Get('/')
-  async getSearchsad(@Req() request: Request): Promise<Object> {
-    return await this.appService.search(request);
+  @Get('/api/v1/public/search/job/:job_id')
+  async getSearchsad(@Req() request: Request) {
+    return await this.appService.getJob(request);
   }
 }

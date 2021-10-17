@@ -9,7 +9,7 @@
         <ion-card
             *virtualItem="let job;"
             [routerLinkActive]
-            routerLink="test"
+            [routerLink]="job.job_id"
             routerDirection="forward"
         >
             <ion-grid fixed>

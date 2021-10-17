@@ -11,7 +11,7 @@ const routes: Routes = [
         component: JobListPage,
     },
     {
-        path: 'test',
+        path: ':id',
         loadChildren: () =>
             import('../job-details/job-details.module').then((m) => m.JobDetailsPageModule),
     },

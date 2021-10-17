@@ -33,7 +33,7 @@ import {
 })
 export class SearchService implements SearchServiceInterface {
 
-    protected basePath = 'https://www.jobs.ch/api/v1/public';
+    protected basePath = 'http://localhost:4200/api/v1/public';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;

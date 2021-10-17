@@ -6,19 +6,52 @@ import * as MOCKED_RESPONSE from './search.json';
 
 @Injectable()
 export class AppService {
-  constructor(private http: HttpService) {}
+  queryParameters = new Map([
+    ['rows', '20'],
+    ['sort', 'date'],
+  ]);
+
+  // Mock data enabled to avoid multiple calls to API
+  mock = false;
+
+  constructor(private http: HttpService) {
+    console.log(this.queryParameters, Object.fromEntries(this.queryParameters));
+  }
 
   async search(request: Request): Promise<Object> {
-    const mock = false;
-    let resp;
+    let resp = { data: {} };
 
-    if (mock) {
+    if (this.mock) {
       resp = await firstValueFrom(of({ data: MOCKED_RESPONSE }));
     } else {
       resp = await firstValueFrom(
         this.http.get('https://jobs.ch/api/v1/public/search', {
-          params: { rows: 5 },
+          params: request.query,
         }),
+      );
+    }
+
+    return resp.data;
+  }
+
+  async getJob(request: Request): Promise<Object> {
+    console.log(request.query);
+
+    let resp = { data: {} };
+
+    if (this.mock) {
+      resp = await firstValueFrom(
+        of({
+          data: MOCKED_RESPONSE.documents.filter(
+            (d) => d.job_id === request.params.job_id,
+          ),
+        }),
+      );
+    } else {
+      resp = await firstValueFrom(
+        this.http.get(
+          'https://jobs.ch/api/v1/public/search/job/' + request.params.job_id,
+        ),
       );
     }
 

@@ -1,5 +1,7 @@
-import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
+import { Document, SearchService } from 'src/app/api';
 
 @Component({
     selector: 'app-job-details',
@@ -8,12 +10,48 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JobDetailsPage implements OnInit {
     defaultHref = 'jobs';
+    job: Document;
 
-    constructor(private location: Location) {}
+    constructor(
+        private searchService: SearchService,
+        private activatedRoute: ActivatedRoute,
+        public loadingController: LoadingController,
+    ) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.activatedRoute.params.subscribe((paramId) => {
+            if (paramId.id) {
+                this.searchService.getJob(paramId.id).subscribe((res) => {
+                    this.job = res;
+                });
+            }
+        });
+    }
 
-    goBack() {
-        this.location.back();
+    async presentLoading() {
+        const loading = await this.loadingController.create({
+            cssClass: 'my-custom-class',
+            message: 'Please wait...',
+            duration: 2000,
+        });
+        await loading.present();
+
+        const { role, data } = await loading.onDidDismiss();
+        console.log('Loading dismissed!');
+    }
+
+    async presentLoadingWithOptions() {
+        const loading = await this.loadingController.create({
+            spinner: null,
+            duration: 5000,
+            message: 'Click the backdrop to dismiss early...',
+            translucent: true,
+            cssClass: 'custom-class custom-loading',
+            backdropDismiss: true,
+        });
+        await loading.present();
+
+        const { role, data } = await loading.onDidDismiss();
+        console.log('Loading dismissed with role:', role);
     }
 }

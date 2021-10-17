@@ -6,6 +6,7 @@
     "scripts": {
         "ng": "ng",
         "generate_api_client": "openapi-generator-cli generate -g typescript-angular -i docs/api-definition.yaml -o ./src/app/api --additional-properties=ngVersion=12.1.1,npmVersion=8.1.10,supportsES6=true,withInterfaces=true",
+        "prestart": "npm run generate_api_client",
         "start": "ng serve --host 0.0.0.0 --proxy-config proxy.config.json",
         "build": "ng build",
         "test": "ng test",
