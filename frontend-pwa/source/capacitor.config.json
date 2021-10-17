@@ -1,6 +1,6 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "jobs-pwa",
-	"webDir": "www",
-	"bundledWebRuntime": false
+    "appId": "io.ionic.starter",
+    "appName": "Kollabo",
+    "webDir": "www",
+    "bundledWebRuntime": false
 }
