@@ -11,6 +11,7 @@ import { Document, SearchService } from 'src/app/api';
 export class JobDetailsPage implements OnInit {
     defaultHref = 'jobs';
     job: Document;
+    pensum: string;
 
     constructor(
         private searchService: SearchService,
@@ -23,35 +24,18 @@ export class JobDetailsPage implements OnInit {
             if (paramId.id) {
                 this.searchService.getJob(paramId.id).subscribe((res) => {
                     this.job = res;
+                    this.setPensumString();
                 });
             }
         });
     }
 
-    async presentLoading() {
-        const loading = await this.loadingController.create({
-            cssClass: 'my-custom-class',
-            message: 'Please wait...',
-            duration: 2000,
-        });
-        await loading.present();
-
-        const { role, data } = await loading.onDidDismiss();
-        console.log('Loading dismissed!');
-    }
-
-    async presentLoadingWithOptions() {
-        const loading = await this.loadingController.create({
-            spinner: null,
-            duration: 5000,
-            message: 'Click the backdrop to dismiss early...',
-            translucent: true,
-            cssClass: 'custom-class custom-loading',
-            backdropDismiss: true,
-        });
-        await loading.present();
-
-        const { role, data } = await loading.onDidDismiss();
-        console.log('Loading dismissed with role:', role);
+    setPensumString() {
+        const pensum = this.job.employment_grades;
+        if (pensum.length === 1) {
+            this.pensum = pensum[0] + ' %';
+        } else {
+            this.pensum = pensum[0] + ' - ' + pensum[pensum.length - 1] + '%';
+        }
     }
 }

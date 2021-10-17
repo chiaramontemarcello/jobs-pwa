@@ -28,6 +28,9 @@ export interface Document {
     industry_id?: number;
     is_active?: boolean;
     is_paid?: boolean;
+    template_text?: string;
+    template_lead_text?: string;
+    template_contact_address?: string;
     employment_grades?: Array<number>;
     images?: DocumentImages;
 }

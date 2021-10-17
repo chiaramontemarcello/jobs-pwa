@@ -133,6 +133,12 @@ components:
                     type: boolean
                 is_paid:
                     type: boolean
+                template_text:
+                    type: string
+                template_lead_text:
+                    type: string
+                template_contact_address:
+                    type: string
                 employment_grades:
                     type: array
                     items:
