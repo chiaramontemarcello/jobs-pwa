@@ -9,21 +9,21 @@
         <ion-card *virtualItem="let job;">
             <ion-grid fixed>
                 <ion-row>
-                    <ion-col size="6">
-                        <ion-img [src]="job.images[0].url"></ion-img>
+                    <ion-col size="3">
+                        <div class="wrapper-company-logo">
+                            <ion-img [src]="job.images[0].url"></ion-img>
+                        </div>
                     </ion-col>
-                    <ion-col size="6"><ion-label>{{job.title}}</ion-label></ion-col>
+                    <ion-col size="9">
+                        <ion-row>
+                            <ion-label class="job-title"> {{job.title}} </ion-label>
+                        </ion-row>
+                        <ion-row>
+                            <ion-label>{{job.company_name}}</ion-label>
+                        </ion-row>
+                    </ion-col>
                 </ion-row>
             </ion-grid>
-            <ion-item>
-                <ion-thumbnail>
-                    <div class="wrapper-company-logo">
-
-                    </div>
-                </ion-thumbnail>
-            </ion-item>
-
-
         </ion-card>
     </ion-virtual-scroll>
     <ion-list> </ion-list>
