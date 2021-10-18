@@ -34,10 +34,10 @@
                 </ion-col>
             </ion-row>
         </ion-card>
-        <ion-card padding>
+        <ion-card padding *ngIf="job.template_lead_text">
             <div class="text-extern" innerHTML="{{job.template_lead_text}}"></div>
         </ion-card>
-        <ion-card padding>
+        <ion-card padding *ngIf="job.template_text">
             <div class="text-extern" innerHTML="{{job.template_text}}"></div>
         </ion-card>
     </ion-grid>
