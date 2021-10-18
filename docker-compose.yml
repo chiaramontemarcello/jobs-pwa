@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   ##################  JOBS PWA  #########################
-  jobs-pwa:
+  frontend-pwa-ionic:
     container_name: jobs-pwa
     image: ${CONTAINER_REGISTRY}/chiaramontemarcello/jobs-pwa/frontend-pwa:latest
     restart: always
@@ -11,3 +11,13 @@ services:
       dockerfile: Dockerfile
     ports:
       - 80:80
+
+  backend-nest-js-jobs:
+    container_name: backend-nest-js-jobs
+    image: ${CONTAINER_REGISTRY}/chiaramontemarcello/jobs-pwa/backend-nest-js:latest
+    restart: always
+    build:
+      context: ./next-proxy-server
+      dockerfile: Dockerfile
+    ports:
+      - 5000:3000
