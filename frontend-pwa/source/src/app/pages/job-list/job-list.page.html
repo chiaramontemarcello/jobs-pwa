@@ -6,13 +6,8 @@
 
 <ion-content class="content-wrapper">
     <ion-progress-bar *ngIf="!jobs" type="indeterminate"></ion-progress-bar>
-    <ion-virtual-scroll [items]="jobs" approxItemHeight="150px">
-        <ion-item
-            *virtualItem="let job"
-            [routerLinkActive]
-            [routerLink]="job.job_id"
-            routerDirection="forward"
-        >
+    <ion-list *ngFor="let job of jobs">
+        <ion-item [routerLinkActive] [routerLink]="job.job_id" routerDirection="forward">
             <ion-grid fixed>
                 <ion-row class="item-row">
                     <ion-col size="3">
@@ -39,6 +34,5 @@
                 </ion-row>
             </ion-grid>
         </ion-item>
-    </ion-virtual-scroll>
-    <ion-list> </ion-list>
+    </ion-list>
 </ion-content>
